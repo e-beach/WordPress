@@ -1,17 +1,6 @@
-# Restart the WordPress database entirely.
-
-# 1. Restart mysql with innodb_force_recovery = 1
-# 4. Run connect.py
-# 2. Remove this setting
-# 3. Restart mysql
-# 5. Copy wordpress to wordpress-backup
-# 6. Edit wp-config.php to be correct
-# 7. Naviaget to localhost:8888/wordpress and redo installation
-
-# if [ "$EUID" -ne 0 ]
-#   then echo "Please run as root"
-#   exit
-# fi
+# This script restarts the WordPress database entirely.
+# It recovers from a MySQL error, creates a new database, backs up a copy of wordpress,
+# and prompts you to edit the wp-config to increment the database counter.
 
 stop=/Applications/MAMP/bin/stopMysql.sh
 start=/Applications/MAMP/bin/startMysql.sh
@@ -31,8 +20,6 @@ sleep 2
 sudo sed -i '' -e '$ d' /etc/my.cnf
 restartMysql
 sleep 2
-
-read -p 'wut'
 
 echo 'creating new database...'
 source python/bin/activate
