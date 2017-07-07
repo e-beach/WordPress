@@ -13,6 +13,7 @@ function restartMysql {
     $start
 }
 
+echo 'enter password to edit /etc/my.cnf'
 sudo echo 'innodb_force_recovery = 1' >> /etc/my.cnf
 restartMysql
 sleep 2
@@ -29,7 +30,7 @@ read -p "Press [Enter] key to edit wordpress config"
 
 cd server-files/htdocs
 
-mv wordpress-backup wordpress-backup-prev
+trash wordpress-backup
 cp -r wordpress wordpress-backup
 vim wordpress/wp-config.php
 
